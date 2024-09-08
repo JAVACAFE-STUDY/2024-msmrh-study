@@ -34,15 +34,16 @@
 
 ## 📁 폴더 구조
 ```
-📦 2024-modern-react-deep-dive-study
+📦 2024-msmrh-study
+ ├─ gahee
  ├─ gyuri
- ├─ wonjun
  ├─ jaewon
- ├─ sehee
+ ├─ jeongmin
+ ├─ mogyeong
  ├─ moonha
  ├─ saemi
- ├─ jeongmin
- ├─ gahee
+ ├─ sehee
+ ├─ wonjun
  └─ README.md
 ```
 
