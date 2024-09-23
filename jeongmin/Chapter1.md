@@ -1,1 +1,1 @@
-[Chapter1.리액트 훅을 활용한 마이크로 상태 관리](https://www.notion.so/2c4eef9991e0452b9a17c246fa44d94c?pvs=4)
+[Chapter1.리액트 훅을 활용한 마이크로 상태 관리](https://creative-brace-94b.notion.site/1-106379a44b4d806c813cc37707a7ece2)
