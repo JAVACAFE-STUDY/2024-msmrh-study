@@ -1,0 +1,1 @@
+[Chapter2.지역 상태와 전역 상태 사용하기](https://creative-brace-94b.notion.site/2-5446f993472f4e25838d618fe54dad75?pvs=25)
