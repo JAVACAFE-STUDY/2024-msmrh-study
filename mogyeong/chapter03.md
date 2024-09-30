@@ -1,0 +1,1 @@
+chapter 02 정리 노션 링크: https://monee1001.notion.site/3-11034d730f9180058db1caa842fc96d5
