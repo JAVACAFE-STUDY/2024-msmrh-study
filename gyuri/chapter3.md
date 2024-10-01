@@ -57,6 +57,15 @@ function Counter() {
 
 컨텍스트 공급자가 새로운 컨텍스트 값을 갖게 되면 모든 컨텍스트 소비자는 새로운 값을 받고 리렌더링됩니다.
 
+P.55
+
+- 처음에 모든 컴포넌트가 렌더링된다.
+- 텍스트 입력 필드에서 값을 변경하면 useState 때문에 App 컴포넌트가 리렌더링된다.
+- ColorContext.Provider는 새로운 값을 받고 동시에 Parent 컴포넌트가 렌더링된다.
+- DummyComponent는 리렌더링되지만 MemoedDummyComponent는 리렌더링되지 않는다.
+- ColorComponent는 두 가지 이유로 렌더링된다. 첫 번째로 부모가 리렌더링됐고, 두 번째로 컨텍스트가 변경됐다.
+- MemoedColorComponent는 컨텍스트가 변경됐기 때문에 리렌더링된다.
+
 ## 4. 컨텍스트에 객체를 사용할 때의 한계점
 
 ```jsx
