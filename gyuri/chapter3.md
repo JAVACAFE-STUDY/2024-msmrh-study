@@ -113,6 +113,8 @@ function Count2Provider({ children }) {
 
 이 예제에서는 `Count1Provider`와 `Count2Provider` 컴포넌트가 유사하며 값을 제공하는 컨텍스트만 다릅니다. 이렇게 하면 `Counter1`과 `Counter2` 컴포넌트는 각각 `count1`과 `count2`가 변경될 때만 리렌더링됩니다.
 
+count1, count2의 상태는 분리되어있지만 컨텍스트는 하나로 구성되어있기 때문에, 상태는 count1만 변함에도 count2의 컴포넌트에도 불필요한 리렌더링이 발생한다. 따라서 컨텍스트를 '여러 조각'으로 나눌 필요가 있다.
+
 ### 5.2 useReducer로 하나의 상태를 만들고 여러 개의 컨텍스트로 전파하기
 
 단일 상태를 만들고 여러 컨텍스트를 사용해 상태 조각을 배포하는 방법도 있습니다.
