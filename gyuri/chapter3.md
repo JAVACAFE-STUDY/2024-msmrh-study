@@ -232,3 +232,33 @@ const App = () => {
 ## 결론
 
 React 컨텍스트는 강력한 상태 관리 도구입니다. 적절히 사용하면 prop drilling을 피하고 효율적으로 데이터를 관리할 수 있습니다. 그러나 과도한 사용은 컴포넌트의 재사용성을 저해할 수 있으므로 주의가 필요합니다. 상황에 따라 적절한 패턴을 선택하여 사용하는 것이 중요합니다.
+
+---
+
+### 고차 컴포넌트로 중첩 공급자 방지
+
+```
+import React from 'react'; const withComposedProviders = (providers) => (WrappedComponent) => { return (props) => providers.reduceRight((acc, [Provider, providerProps]) => <Provider {...providerProps}>{acc}</Provider>, <WrappedComponent {...props} /> ); }; const App = () => { const providers = [ [Count1Provider, { initialValue: 10 }], [Count2Provider, { initialValue: 20 }], [Count3Provider, { initialValue: 30 }], [Count4Provider, { initialValue: 40 }], [Count5Provider, { initialValue: 50 }], ]; const EnhancedParent = withComposedProviders(providers)(Parent); return <EnhancedParent />; };
+
+```
+
+### 리덕스 보다 컨텍스트를 더 많이 씀
+
+context 보일러 플레이트 줄여주는 라이브러리 : [https://github.com/diegohaz/constate](https://github.com/diegohaz/constate "https://github.com/diegohaz/constate")
+
+왜 Context 대신 전역 상태 관리 라이브러리를 사용할까?
+
+- 셀렉터, 로컬스토리지 사용 등 추가적인 편의 기능도 제공하니 DX의 이유
+
+변경되는 데이터가 1000개 이상일때 부터 성능 체감이 느껴짐
+useMemo에서 복잡도가 5000일때 초기 랜더링 속도가 느려지고 후속 랜더링 성능은 증가한다는걸 보면 대부분의 상황에서는 사용하지 않는 것이 효율적이지 않을까?
+https://northern-goldfish-40c.notion.site/b26d413d458c4edcb2e86c8b092d4ec8
+
+### 디자인 시스템에서 아이콘 이미지 관리하기
+
+- 패키지로 관리
+- S3에서 관리 - svg의 장점은 path, currentColor 등의 코드로 변화를 줄 수 있는 장점이 있는데 S3에서 가져오게되면 이 기능을 사용하지 못함.
+  [https://channel.io/ko/blog/figma-icon-plugin](https://channel.io/ko/blog/figma-icon-plugin "https://channel.io/ko/blog/figma-icon-plugin")
+  [https://github.com/channel-io/bezier-react/tree/main/packages/bezier-icons](https://github.com/channel-io/bezier-react/tree/main/packages/bezier-icons "https://github.com/channel-io/bezier-react/tree/main/packages/bezier-icons")
+  [https://github.com/channel-io/bezier-react/blob/main/packages/bezier-react/src/components/Icon/Icon.tsx](https://github.com/channel-io/bezier-react/blob/main/packages/bezier-react/src/components/Icon/Icon.tsx "https://github.com/channel-io/bezier-react/blob/main/packages/bezier-react/src/components/Icon/Icon.tsx")
+  [https://www.npmjs.com/package/loplat-ui](https://www.npmjs.com/package/loplat-ui "https://www.npmjs.com/package/loplat-ui")
