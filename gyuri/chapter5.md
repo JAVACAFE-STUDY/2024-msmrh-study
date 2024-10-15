@@ -169,3 +169,17 @@ const App = () => (
 
 export default App;
 ```
+
+## Provider 없이 Context를 사용하는 경우?
+
+```tsx
+const MyContext = React.createContext({ value: "default" });
+
+const MyComponent = () => {
+  const value = useContext(MyContext);
+  return <div>{value}</div>;
+};
+```
+
+- 앱 전체에서 사용되는 고정된 설정값
+- 테마 정보나 언어 설정 등의 기본값
