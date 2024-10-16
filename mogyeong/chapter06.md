@@ -1,0 +1,1 @@
+chapter 06 정리 노션 링크: https://monee1001.notion.site/6-12134d730f918081a6f4d40cb39b6b3a?pvs=25
