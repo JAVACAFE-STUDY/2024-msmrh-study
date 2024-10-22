@@ -1,0 +1,1 @@
+[Chapter6. 전역 상태 관리 라이브러리 소개](https://creative-brace-94b.notion.site/6-127379a44b4d80519a11cc117209565c)
