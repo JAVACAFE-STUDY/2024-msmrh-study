@@ -29,6 +29,56 @@ const Component = () => {
 
 ## 읽기 상태와 갱신 상태 사용하기
 
+1. 선택자 사용 : `const selectCountl = (state: StoreState) => state.countl;`
+2. store에 함수를 추가해서 몇 개의 로직이 컴포넌트 외부에 위치하게 할 수 있다.
+
+```tsx
+const useStore = create<StoreState>((set) => ({
+    count1: 0,
+    count2: 0,
+    inc1: 0 => set(
+    (prev) => ({ count1: prev.count1 + 1 })
+    inc2: () => set(
+    (prev) => ({ count2: prev.count2 + 1 })
+    }));
+```
+
+3. 파생 상태로 사용할 수 있다.
+   예시의 경우, 합계가 변경될 때만 리렌더링 된다.
+
+```tsx
+const selectTotal = (state: StoreState) => state.count1 + state.count2;
+
+const Total = 0 => {
+    const total = useStore(selectTotal);
+    return (
+        <div>
+            total: {total}
+        </div>
+    );
+}
+```
+
+4. store에서 합계를 생성할 수도 있다.
+   여러 속성을 동시에 계산한 후 동기화 상태를 유지
+   Jotai가 좀 더 잘한다.
+
+```tsx
+const useStore = create((set) => ({ count1: 0,
+    count2: 0,
+    total: 0,
+    inc1: () => set((prev) => ({ ...prey,
+    count1: prev.count1 + 1,
+    total: prev.count1 + 1 + prev.count2,
+    }))'
+    inc2: 0 => set((prev) => ({
+    ...prev,
+    count2: prev.count2 + 1,
+    total : prev.count2 + 1 + prev.count1,
+    })),
+}));
+```
+
 ## 구조화된 데이터 처리하기
 
 만들고자 하는 기능의 객체 타입을 정한다. 이것을 바탕으로 StoreState 타입을 정의한다.
@@ -44,8 +94,9 @@ type StoreState = {
 };
 ```
 
-addTodo, removeTodo, toggleTodo 함수가 불변방식으로구현돼 있음
+addTodo, removeTodo, toggleTodo 함수가 불변 방식으로 구현돼 있음
 기존 객체와 배열을 변경하지 않고 새로운 객체와 배열을 생성
+store 의 불변상태갱신과 리액트가 제공하는 memo함수덕분에 리렌더링을 최적화할 수 있다.
 
 ## 이 접근 방식과 라이브러리의 장단점
 
@@ -65,6 +116,94 @@ Zustand의 한계는 선택자를 이용한 수동 렌더링 최적화이다.
 
 이번 장에서는 store 생성자에 일부 기능을 제공할 수 있는 미들웨어와 리액트 생명주기에서 store를 생성하는 비모듈 상태 사용 등 Zustand의 다른 몇 가지 기능에 대해서는 다루지는 않았다. 이는 라이브러리를 선택할 때 고려해야 할 또 다른 사항이 될 수 있다.
 
-> 미들웨어
+네, zustand의 미들웨어와 비모듈 상태에 대해 설명해드리겠습니다.
 
-> 비모듈 상태
+## 미들웨어 (Middleware)
+
+미들웨어는 store의 동작을 확장하거나 수정할 수 있게 해주는 기능입니다.
+
+주요 미들웨어 예시:
+
+### 1. persist 미들웨어
+
+```typescript
+import create from "zustand";
+import { persist } from "zustand/middleware";
+
+const useStore = create(
+  persist(
+    (set) => ({
+      bears: 0,
+      addBear: () => set((state) => ({ bears: state.bears + 1 })),
+    }),
+    {
+      name: "bear-storage", // 로컬 스토리지에 저장될 키 이름
+      getStorage: () => localStorage, // 스토리지 타입 설정
+    }
+  )
+);
+```
+
+- 상태를 localStorage나 sessionStorage에 자동으로 저장하고 복원합니다.
+- 페이지 새로고침 후에도 상태를 유지할 수 있습니다.
+
+### 2. devtools 미들웨어
+
+```typescript
+import create from "zustand";
+import { devtools } from "zustand/middleware";
+
+const useStore = create(
+  devtools((set) => ({
+    bears: 0,
+    addBear: () => set((state) => ({ bears: state.bears + 1 })),
+  }))
+);
+```
+
+- Redux DevTools와 연동하여 상태 변화를 추적할 수 있습니다.
+- 디버깅에 매우 유용합니다.
+
+## 비모듈 상태 (Non-module State)
+
+비모듈 상태는 React 컴포넌트의 생명주기 내에서 store를 동적으로 생성하고 관리하는 방식입니다.
+
+### 사용 예시:
+
+```typescript
+import create from "zustand";
+import { createContext, useContext } from "react";
+
+const createStore = () =>
+  create((set) => ({
+    bears: 0,
+    addBear: () => set((state) => ({ bears: state.bears + 1 })),
+  }));
+
+const StoreContext = createContext(null);
+
+export const StoreProvider = ({ children }) => {
+  const [store] = useState(createStore);
+  return (
+    <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
+  );
+};
+
+// 컴포넌트에서 사용
+const Component = () => {
+  const store = useContext(StoreContext);
+  const bears = store((state) => state.bears);
+  return <div>{bears} bears</div>;
+};
+```
+
+### 비모듈 상태의 장점:
+
+1. 서버 사이드 렌더링(SSR) 지원이 용이합니다
+2. 여러 store 인스턴스를 동시에 사용할 수 있습니다
+3. 컴포넌트 트리별로 독립된 상태 관리가 가능합니다
+
+### 주의사항:
+
+- 비모듈 상태를 사용할 때는 store의 생명주기 관리에 주의해야 합니다
+- 메모리 누수를 방지하기 위해 적절한 정리(cleanup) 작업이 필요할 수 있습니다
