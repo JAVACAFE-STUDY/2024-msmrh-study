@@ -4,3 +4,4 @@
 [4장: 구독을 이용한 모듈 상태 공유](https://northern-goldfish-40c.notion.site/4-10683788eeef80d18a6dcbc8ccd545ff)
 [5장: 리액트 컨텍스트와 구독을 이용한 컴포넌트 상태 공유](https://northern-goldfish-40c.notion.site/5-56c65489806f460396f3377f30820b96?pvs=74)
 [6장: 전역 상태 관리 라이브러리 소개](https://northern-goldfish-40c.notion.site/6-10b83788eeef80e2b68edb7fa7ac7443?pvs=74)
+[7장: 사용 사례 시나리오 1: Zustand](https://northern-goldfish-40c.notion.site/7-1-Zustand-11383788eeef80e1bf27dcc14f00da99?pvs=74)
