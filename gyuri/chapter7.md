@@ -29,14 +29,14 @@ const Component = () => {
 
 ## 읽기 상태와 갱신 상태 사용하기
 
-1. 선택자 사용 : `const selectCountl = (state: StoreState) => state.countl;`
+1. 선택자 사용 : `const selectCount1 = (state: StoreState) => state.count1;`
 2. store에 함수를 추가해서 몇 개의 로직이 컴포넌트 외부에 위치하게 할 수 있다.
 
 ```tsx
 const useStore = create<StoreState>((set) => ({
     count1: 0,
     count2: 0,
-    inc1: 0 => set(
+    inc1: () => set(
     (prev) => ({ count1: prev.count1 + 1 })
     inc2: () => set(
     (prev) => ({ count2: prev.count2 + 1 })
