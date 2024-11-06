@@ -1,0 +1,1 @@
+chapter 08 정리 노션 링크: https://monee1001.notion.site/8-2-Jotai-13034d730f9180f3a62acae402786bb5
