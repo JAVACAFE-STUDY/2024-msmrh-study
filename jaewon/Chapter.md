@@ -13,3 +13,5 @@
 [7장: 사용 사례 시나리오 1: Zustand](https://northern-goldfish-40c.notion.site/7-1-Zustand-11383788eeef80e1bf27dcc14f00da99?pvs=74)
 
 [8장. 사용 사례 시나리오 2: Jotai](https://northern-goldfish-40c.notion.site/8-2-Jotai-13383788eeef808792eff2eb085c200c)
+
+[9장. 사용 사례 시나리오 3: Valtio](https://northern-goldfish-40c.notion.site/9-3-Valtio-13b83788eeef80fe8010d158699b8fff?pvs=4)
