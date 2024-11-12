@@ -4,18 +4,59 @@ Zustand, Jotai와 다르게 변경 가능한 갱신 모델 (mutating update mode
 
 리액트와 통합하기 위해 proxy를 사용해 변경 불가능한 snapshot을 가져온다.
 
-## 또 다른 모듈 상태 라이브러리인 Valtio 살펴보기
+# Valtio 핵심 개념 정리
 
-## 프락시를 활용한 변경 감지 및 불변 상태 생성하기
+## 1. 기본 특징
 
-## 프락시를 활용한 리렌더링 최적화
+- 변경 가능한 갱신 모델(mutating update model) 사용
+- 리액트와의 통합을 위해 proxy와 snapshot 활용
+- 두 가지 상태 업데이트 모델 제공:
+  - 프락시 객체 (변경 가능)
+  - 스냅숏 (불변)
 
-## 작은 애플리케이션 만들어보기
+## 2. 주요 기술적 특징
 
-## 이 접근 방식의 장단점
+- ES6 프락시를 활용한 변경 감지
+- 스냅숏은 필요한 경우에만 생성되어 메모리 최적화
+- 중첩된 객체와 배열 완벽 지원
+- 자동 리렌더링 최적화
 
-Valtio에는 두 가지 상태 업데이트 모델이 있다.
-불변 갱신
-변경 가능한 갱신
+## 3. 사용 방법
 
-리액트는 불변 갱신이기 때문에 proxy, snapshot으로 맞춰준다.
+```typescript
+import { proxy, useSnapshot } from "valtio";
+
+// 상태 생성
+const state = proxy({ count: 0 });
+
+// 컴포넌트에서 사용
+const Component = () => {
+  const snap = useSnapshot(state);
+  return <div>{snap.count}</div>;
+};
+
+// 상태 수정
+state.count++; // 직접 수정 가능
+```
+
+## 4. 장단점
+
+### 장점
+
+- 네이티브 자바스크립트처럼 직관적인 상태 수정
+- 간결한 코드 작성 가능
+- 자동화된 리렌더링 최적화
+
+### 단점
+
+- 내부 동작의 예측 가능성이 낮음
+- 디버깅이 어려울 수 있음
+- 불변/가변 상태 모델 혼용으로 인한 혼란 가능성
+
+### 참고자료
+
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
+
+https://github.com/pmndrs/valtio/blob/e65fd89fb089f810274bedb028fa49f63f98600e/src/vanilla.ts#L62
