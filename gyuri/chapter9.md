@@ -53,6 +53,23 @@ state.count++; // 직접 수정 가능
 - 디버깅이 어려울 수 있음
 - 불변/가변 상태 모델 혼용으로 인한 혼란 가능성
 
+## 5. 성능 최적화
+
+useSnapshot()은 컴포넌트가 실제로 사용하는 속성만 추적합니다
+중첩된 객체의 경우에도 변경된 부분만 새로운 참조가 생성되어 효율적입니다
+
+```typescript
+const state = proxy({
+  user: {
+    name: "Kim",
+    settings: { theme: "dark" },
+  },
+});
+
+// settings만 변경되면 user.name은 동일한 참조 유지
+state.user.settings.theme = "light";
+```
+
 ### 참고자료
 
 https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
