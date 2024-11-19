@@ -121,7 +121,6 @@ react-redux를 사용할때, "createTrackedSelector"를 사용해서 선택자�
  - proxy-compare
  - use-sync-external-selector
 
-결국 작가의 자랑인것같다. 
 이걸 쓰면 나중에 useCreateSelector와 비슷한 구현체가 리액트에서 제공되도 쉽게 마이그레이션 할 수 있을것이라고 한다. 
 
 
