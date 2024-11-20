@@ -15,3 +15,5 @@
 [8장. 사용 사례 시나리오 2: Jotai](https://northern-goldfish-40c.notion.site/8-2-Jotai-13383788eeef808792eff2eb085c200c)
 
 [9장. 사용 사례 시나리오 3: Valtio](https://northern-goldfish-40c.notion.site/9-3-Valtio-13b83788eeef80fe8010d158699b8fff?pvs=4)
+
+[10장. 사용 사례 시나리오 4: React Tracked](https://northern-goldfish-40c.notion.site/10-4-React-Tracked-14183788eeef80a0ada4c6aa45613d93)
