@@ -17,3 +17,5 @@
 [9장. 사용 사례 시나리오 3: Valtio](https://northern-goldfish-40c.notion.site/9-3-Valtio-13b83788eeef80fe8010d158699b8fff?pvs=4)
 
 [10장. 사용 사례 시나리오 4: React Tracked](https://northern-goldfish-40c.notion.site/10-4-React-Tracked-14183788eeef80a0ada4c6aa45613d93)
+
+[11장. 세가지 전역상태 라이브러리의 유사점과 차이점](https://northern-goldfish-40c.notion.site/11-14883788eeef8034a413f66ed6d2daca)
