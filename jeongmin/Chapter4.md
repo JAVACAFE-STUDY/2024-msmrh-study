@@ -1,1 +1,0 @@
-[Chapter4.구독을 이용한 모듈 상태 공유](https://creative-brace-94b.notion.site/4-119379a44b4d8024a59bf84e1e606458?pvs=4)
